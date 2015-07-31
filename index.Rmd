@@ -286,7 +286,7 @@ ggplot(hi_mean_rt) + geom_bar(aes(x = screenName, y = mean_rt),
 
 The top 100 words among the original tweets.
 
-```{r word-cloud, echo=FALSE}
+```{r word-cloud, echo=FALSE, message=FALSE, warning=FALSE}
 library(wordcloud)
 
 pal <- wes_palette("Darjeeling", 8, type = "continuous") #brewer.pal(8, "Dark2")
