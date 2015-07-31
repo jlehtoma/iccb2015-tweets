@@ -1,15 +1,13 @@
 ---
-title: "A summary of the tweets generated at the 2015 Evolution meeting"
-author: François Michonneau
+title: "A summary of the tweets generated at the ICCB-ECCB 2015 meeting"
+author: Joona Lehtomäki
 output:
    html_document:
-     toc: true
+     theme: flatly
+     toc: yes
 ---
 
----
-
-
-```{r, echo=FALSE}
+```{r search, echo=FALSE}
 ## This is the code I used to retrieve the tweets.
 
 ## I started to ask the API for 5000 tweets but realized it wasn't
@@ -19,12 +17,17 @@ output:
 ## To archive the data, I generated a RDS file, that I later exported
 ## to CSV and archived on figshare.
 
-## tweets <- searchTwitter("#evol2015", n = 5000)
-## saveRDS(tweets, "raw_tweets.rds")
+#library(twitteR)
 
-## dt_tweets <- twListToDF(tweets)
+#tweets <- searchTwitter("#ICCB2015")
 
-## dt_tweets_part1 <- dt_tweets
+# Make request on daily basis and use date as a timestamp
+#today <- Sys.Date()
+#saveRDS(tweets, file.path("data", paste0("raw_tweets_", today, ".rds")))
+
+#dt_tweets <- twListToDF(tweets)
+
+#dt_tweets_part1 <- dt_tweets
 
 ## tweets_part2 <- searchTwitter("#evol2015", n = 5000, maxID = min(dt_tweets_part1$id))
 ## saveRDS(tweets_part2, file = "raw_tweets_part2.rds")
@@ -32,42 +35,51 @@ output:
 ## dt_tweets_part2 <- twListToDF(tweets_part2)
 
 ## dt_tweets <- rbind(dt_tweets_part1, dt_tweets_part2)
-## saveRDS(dt_tweets, file = "data_frame_all_tweets.rds")
+#saveRDS(dt_tweets, file = "data/data_frame_all_tweets.rds")
 ```
 
-```{r, echo=FALSE}
-## dt_tweets <- readRDS(file = "data_frame_all_tweets.rds")
-dt_tweets <- read.csv(file = "evol2015_tweets.csv", stringsAsFactors = FALSE)
+```{r, echo=FALSE, message=FALSE}
+dt_tweets <- readRDS(file = "data/data_frame_all_tweets.rds")
+#dt_tweets <- read.csv(file = "evol2015_tweets.csv", stringsAsFactors = FALSE)
 dt_tweets$created <- as.Date(dt_tweets$created)
 
 library(dplyr)
 library(ggplot2)
+library(knitr)
 library(tidyr)
 library(wesanderson)
 ```
 
 ## About this document
 
+The code generating this documents was originally developed by François 
+Michonneau ([fmic_](https://twitter.com/fmic_)) for 
+[2015 Evolution conference](http://evolution2015.org/). Here, it's adapted for 
+ICCB-ECCB 2015 with very minor changes by Joona Lehtomäki 
+([jlehtoma](https://twitter.com/jlehtoma)).
+
 This document was generated using RMarkdown, and the source is available on
 GitHub at:
-[https://github.com/fmichonneau/evol2015-tweets](https://github.com/fmichonneau/evol2015-tweets).
+[https://github.com/jlehtoma/iccb2015-tweets](https://github.com/jlehtoma/iccb2015-tweets)
+(forked from [https://github.com/fmichonneau/evol2015-tweets](https://github.com/fmichonneau/evol2015-tweets)).
 
 Pull requests to add other figures or fix bugs are welcome.
 
-The dataset used here is available as a CSV file from
-[figshare](http://figshare.com/articles/Evolution_2015_tweets/1470180).
+The dataset accumulated during the conference will be available as a CSV file 
+from figshare after the conference.
 
-This document (and associated code) is released under a CC0 licence.
+This document (and associated code) is released under a 
+[CC0 licence](https://creativecommons.org/publicdomain/zero/1.0/).
 
-If you have questions or comments, I am on twitter at
-[fmic_](https://twitter.com/fmic_) or by email at [francois.michonneau@gmail.com](mailto:francois.michonneau@gmail.com)
-
+All questions and comments very welcome, just ping [jlehtoma](https://twitter.com/jlehtoma) or [fmic_](https://twitter.com/fmic_)
+(original author) on Twitter.
 
 ## Basic summary
-
-* Total number of tweets with the #Evol2015 hashtag between June 22nd, and July 1st 2015: `r nrow(dt_tweets)`.
-* Total of original tweets (no retweets): `r sum(!dt_tweets$isRetweet)`.
-* Number of users who tweeted: `r length(unique(dt_tweets$screenName))`.
+| Description | n |
+|-------------|---|
+| Tweets with the `#ICCB2015` hashtag starting from July 22nd: | `r nrow(dt_tweets)` |
+| Original tweets (no retweets): | `r sum(!dt_tweets$isRetweet)` |
+| Users who tweeted: | `r length(unique(dt_tweets$screenName))` |
 
 
 ## The 5 most favorited tweets
@@ -302,12 +314,12 @@ dt_tweets %>%
   <br />
   To the extent possible under law,
   <a rel="dct:publisher"
-     href="https://github.com/fmichonneau/evol2015-tweets">
-    <span property="dct:title">Francois Michonneau</span></a>
+     href="https://github.com/jlehtoma/iccb2015-tweets">
+    <span property="dct:title">Joona Lehtomäki</span></a>
   has waived all copyright and related or neighboring rights to
-  <span property="dct:title">Summary of tweets at the 2015 Evolution conference</span>.
+  <span property="dct:title">Summary of tweets at the ICCB-ECCB 2015 conference</span>.
 This work is published from:
 <span property="vcard:Country" datatype="dct:ISO3166"
-      content="US" about="https://github.com/fmichonneau/evol2015-tweets">
-  United States</span>.
+      content="EU" about="https://github.com/jlehtoma/iccb2015-tweets">
+  Finland</span>.
 </p>
