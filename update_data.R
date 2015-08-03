@@ -8,7 +8,6 @@
 ## to CSV and archived on figshare.
 
 library(twitteR)
-source("config.R")
 
 # Load saved tweets
 twitter_data <- "data/data_frame_all_tweets.rds"
@@ -20,7 +19,7 @@ new_tweets <- searchTwitter("#ICCB2015", n = 5000, sinceID = max(dt_tweets$id))
 time_updated <- Sys.time()
 time_stamp <- format(time_updated, "%Y-%m-%d_%H-%M")
 
-if (length(new_tweets > 1)) {
+if (length(new_tweets) > 1) {
   # Make request and use now as a timestamp
   
   saveRDS(new_tweets, file.path("data", paste0("raw_tweets_", time_stamp, 

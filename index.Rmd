@@ -7,8 +7,9 @@ output:
      toc: yes
 ---
 
-```{r search, echo=FALSE, message=FALSE, warning=FALSE}
+```{r search, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 
+source("config.R")
 source("update_data.R")
 
 ```
