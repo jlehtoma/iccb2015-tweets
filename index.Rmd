@@ -7,40 +7,16 @@ output:
      toc: yes
 ---
 
-```{r search, echo=FALSE}
-## This is the code I used to retrieve the tweets.
+```{r search, echo=FALSE, message=FALSE, warning=FALSE}
 
-## I started to ask the API for 5000 tweets but realized it wasn't
-## enough to get them all, so I did a second call, that reached the
-## limit on how far back it can get.
+source("update_data.R")
 
-## To archive the data, I generated a RDS file, that I later exported
-## to CSV and archived on figshare.
-
-#library(twitteR)
-
-#tweets <- searchTwitter("#ICCB2015")
-
-# Make request on daily basis and use date as a timestamp
-#today <- Sys.Date()
-#saveRDS(tweets, file.path("data", paste0("raw_tweets_", today, ".rds")))
-
-#dt_tweets <- twListToDF(tweets)
-
-#dt_tweets_part1 <- dt_tweets
-
-## tweets_part2 <- searchTwitter("#evol2015", n = 5000, maxID = min(dt_tweets_part1$id))
-## saveRDS(tweets_part2, file = "raw_tweets_part2.rds")
-
-## dt_tweets_part2 <- twListToDF(tweets_part2)
-
-## dt_tweets <- rbind(dt_tweets_part1, dt_tweets_part2)
-#saveRDS(dt_tweets, file = "data/data_frame_all_tweets.rds")
 ```
 
 ```{r, echo=FALSE, message=FALSE}
-dt_tweets <- readRDS(file = "data/data_frame_all_tweets.rds")
-#dt_tweets <- read.csv(file = "evol2015_tweets.csv", stringsAsFactors = FALSE)
+# Load saved tweets
+twitter_data <- "data/data_frame_all_tweets.rds"
+dt_tweets <- readRDS(file = twitter_data)
 dt_tweets$created <- as.Date(dt_tweets$created)
 
 library(dplyr)
@@ -75,6 +51,9 @@ All questions and comments very welcome, just ping [jlehtoma](https://twitter.co
 (original author) on Twitter.
 
 ## Basic summary
+
+Last update time: `r time_updated`.
+
 | Description | n |
 |-------------|---|
 | Tweets with the `#ICCB2015` hashtag starting from July 22nd: | `r nrow(dt_tweets)` |
