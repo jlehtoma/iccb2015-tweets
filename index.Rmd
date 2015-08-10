@@ -2,7 +2,7 @@
 title: "A summary of the tweets generated at the ICCB-ECCB 2015 meeting"
 author: Joona Lehtomäki
 output:
-   html_document:
+   html_document: 
      theme: flatly
      toc: yes
 ---
@@ -42,8 +42,8 @@ GitHub at:
 
 Pull requests to add other figures or fix bugs are welcome.
 
-The dataset accumulated during the conference will be available as a CSV file 
-from figshare after the conference.
+The dataset accumulated during the conference is available as a CSV file 
+from figshare: http://dx.doi.org/10.6084/m9.figshare.1506667.
 
 This document (and associated code) is released under a 
 [CC0 licence](https://creativecommons.org/publicdomain/zero/1.0/).
@@ -57,7 +57,7 @@ Last update time: `r time_updated`.
 
 | Description | n |
 |-------------|---|
-| Tweets with the `#ICCB2015` hashtag starting from July 22nd: | `r nrow(dt_tweets)` |
+| Tweets with the `#ICCB2015` hashtag between July 22nd and August 10th: | `r nrow(dt_tweets)` |
 | Original tweets (no retweets): | `r sum(!dt_tweets$isRetweet)` |
 | Users who tweeted: | `r length(unique(dt_tweets$screenName))` |
 
